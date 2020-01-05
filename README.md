@@ -5,7 +5,7 @@ This uses the 1913 edition of Webster's Unabridged Dictionary from Project Guten
 Running `parser.py` will load the file into memory and open port 1913 on localhost so you
 can curl for a definition; e.g.:
 
-```
+```console
 $ curl localhost:1913/allegiance
 Al*le"giance, n. Etym: [OE. alegeaunce; pref. a- + OF. lige, liege.
 The meaning was influenced by L. ligare to bind, and even by lex,
@@ -54,4 +54,15 @@ function define() {
     local word=$1
     curl -s "localhost:1913/$word"
 }
+```
+
+```console
+me@here ~ $ define abracadabra
+Ab`ra*ca*dab"ra, n. Etym: [L. Of unknown origin.]
+
+Defn: A mystical word or collocation of letters written as in the
+figure. Worn on an amulet it was supposed to ward off fever. At
+present the word is used chiefly in jest to denote something without
+meaning; jargon.
+me@here ~ $
 ```
