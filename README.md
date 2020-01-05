@@ -6,36 +6,14 @@ Running `parser.py` will load the file into memory and open port 1913 on localho
 can curl for a definition; e.g.:
 
 ```console
-$ curl localhost:1913/allegiance
-Al*le"giance, n. Etym: [OE. alegeaunce; pref. a- + OF. lige, liege.
-The meaning was influenced by L. ligare to bind, and even by lex,
-legis, law. See Liege, Ligeance.]
+me@here ~ $ curl localhost:1913/abracadabra
+Ab`ra*ca*dab"ra, n. Etym: [L. Of unknown origin.]
 
-1. The tie or obligation, implied or expressed, which a subject owes
-to his sovereign or government; the duty of fidelity to one's king,
-government, or state.
-
-2. Devotion; loyalty; as, allegiance to science.
-
-Syn.
--- Loyalty; fealty.
--- Allegiance, Loyalty. These words agree in expressing the general
-idea of fidelity and attachment to the "powers that be." Allegiance
-is an obligation to a ruling power. Loyalty is a feeling or sentiment
-towards such power. Allegiance may exist under any form of
-government, and, in a republic, we generally speak of allegiance to
-the government, to the state, etc. In well conducted monarchies,
-loyalty is a warm-hearted feeling of fidelity and obedience to the
-sovereign. It is personal in its nature; and hence we speak of the
-loyalty of a wife to her husband, not of her allegiance. In cases
-where we personify, loyalty is more commonly the word used; as,
-loyalty to the constitution; loyalty to the cause of virtue; loyalty
-to truth and religion, etc.
-Hear me, recreant, on thine allegiance hear me! Shak.
-So spake the Seraph Abdiel, faithful found, . . . Unshaken,
-unseduced, unterrified, His loyalty he kept, his love, his zeal.
-Milton.
-$
+Defn: A mystical word or collocation of letters written as in the
+figure. Worn on an amulet it was supposed to ward off fever. At
+present the word is used chiefly in jest to denote something without
+meaning; jargon.
+me@here ~ $
 ```
 
 No frameworks are used and no safegaurds are in place, so as stated in the
@@ -57,12 +35,31 @@ function define() {
 ```
 
 ```console
-me@here ~ $ define abracadabra
-Ab`ra*ca*dab"ra, n. Etym: [L. Of unknown origin.]
+me@here ~ $ define light
+Light, n. Etym: [OE.light, liht, AS. leót; akin to OS. lioht, D. & G.
+licht, OHG. lioht, Goth. liuhap, Icel. lj, L. lux light, lucere to
+shine, Gr. ruc to shine. Lucid, Lunar, Luminous, Lynx.]
 
-Defn: A mystical word or collocation of letters written as in the
-figure. Worn on an amulet it was supposed to ward off fever. At
-present the word is used chiefly in jest to denote something without
-meaning; jargon.
-me@here ~ $
+1. That agent, force, or action in nature by the operation of which
+upon the organs of sight, objects are rendered visible or luminous.
+
+Note: Light was regarded formerly as consisting of material
+particles, or corpuscules, sent off in all directions from luminous
+bodies, and traversing space, in right lines, with the known velocity
+of about 186,300 miles per second; but it is now generally understood
+to consist, not in any actual transmission of particles or substance,
+but in the propagation of vibrations or undulations in a subtile,
+elastic medium, or ether, assumed to pervade all space, and to be
+thus set in vibratory motion by the action of luminous bodies, as the
+atmosphere is by sonorous bodies. This view of the nature of light is
+known as the undulatory or wave theory; the other, advocated by
+Newton (but long since abandoned), as the corpuscular, emission, or
+Newtonian theory. A more recent theory makes light to consist in
+electrical oscillations, and is known as the electro-magnetic theory
+of light.
+
+2. That which furnishes, or is a source of, light, as the sun, a
+...
 ```
+
+heh... ether.
