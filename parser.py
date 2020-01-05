@@ -37,8 +37,8 @@ class Responder(BaseHTTPRequestHandler):
 
     book = load_from_file(str((Path(__file__).parent / "dictionary.txt").resolve()))
 
-    def _set_headers(self):
-        self.send_response(200)
+    def _set_headers(self, response=200):
+        self.send_response(response)
         self.send_header("Content-Type", "text/plain; charset=UTF-8")
         self.end_headers()
 
@@ -46,12 +46,14 @@ class Responder(BaseHTTPRequestHandler):
         return msg.encode("utf8")
 
     def do_GET(self):
-        self._set_headers()
-        word = self.path.split("/", 1)[-1].lower()
+        word = self.path.split("/")[-1].lower()
         if word and word in self.book:
+            self._set_headers()
             self.wfile.write(self._html("\n".join(self.book[word])))
         else:
-            self.wfile.write(self._html("word not found\n"))
+            self._set_headers(response=404)
+            self.wfile.write(self._html(f"{word} not found\n"))
+        self.close_connection = True
 
 
 def run(server=HTTPServer, handler=Responder, address="127.0.0.1", port=1913):
