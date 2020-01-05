@@ -54,6 +54,7 @@ class Responder(BaseHTTPRequestHandler):
             self._set_headers(response=404)
             self.wfile.write(self._html(f"{word} not found\n"))
         self.close_connection = True
+        sys.stderr.flush()
 
 
 def run(server=HTTPServer, handler=Responder, address="127.0.0.1", port=1913):
@@ -62,7 +63,7 @@ def run(server=HTTPServer, handler=Responder, address="127.0.0.1", port=1913):
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print("exiting...")
+        sys.stdout.write("exiting...")
         httpd.shutdown()
         sys.stdout.write("cleanly exited")
     except Exception as e:
