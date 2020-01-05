@@ -2,11 +2,11 @@ This uses the 1913 edition of Webster's Unabridged Dictionary from Project Guten
 
 [https://www.gutenberg.org/ebooks/29765](https://www.gutenberg.org/ebooks/29765)
 
-Running `parser.py` will load the file into memory and open port 9980 on localhost so you
+Running `parser.py` will load the file into memory and open port 1913 on localhost so you
 can curl for a definition; e.g.:
 
 ```
-$ curl localhost:9980/allegiance
+$ curl localhost:1913/allegiance
 Al*le"giance, n. Etym: [OE. alegeaunce; pref. a- + OF. lige, liege.
 The meaning was influenced by L. ligare to bind, and even by lex,
 legis, law. See Liege, Ligeance.]
@@ -52,6 +52,6 @@ it with a bash function:
 
 function define() {
     local word=$1
-    curl -s "localhost:9980/$word"
+    curl -s "localhost:1913/$word"
 }
 ```

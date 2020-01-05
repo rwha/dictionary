@@ -16,7 +16,7 @@ def iter_words(filepath):
 
 
 def load_from_file(filepath):
-    sys.stdout.write("parsing file... ")
+    sys.stdout.write(f"parsing {filepath}... ")
     sys.stdout.flush()
     book = {}
     word = None
@@ -48,13 +48,13 @@ class Responder(BaseHTTPRequestHandler):
     def do_GET(self):
         self._set_headers()
         word = self.path.split("/", 1)[-1].lower()
-        if word in self.book:
+        if word and word in self.book:
             self.wfile.write(self._html("\n".join(self.book[word])))
         else:
             self.wfile.write(self._html("word not found\n"))
 
 
-def run(server=HTTPServer, handler=Responder, address="127.0.0.1", port=9980):
+def run(server=HTTPServer, handler=Responder, address="127.0.0.1", port=1913):
     s = (address, port)
     httpd = server(s, handler)
     try:
@@ -62,10 +62,10 @@ def run(server=HTTPServer, handler=Responder, address="127.0.0.1", port=9980):
     except KeyboardInterrupt:
         print("exiting...")
         httpd.shutdown()
-        quit("cleanly exited")
-    except:
+        sys.stdout.write("cleanly exited")
+    except Exception as e:
+        sys.stdout.write("exiting:", str(e))
         httpd.shutdown()
-        quit("killed")
 
 
 if __name__ == "__main__":
