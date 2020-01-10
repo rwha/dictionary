@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import sys
+from collections import defaultdict
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
@@ -18,18 +19,18 @@ def iter_words(filepath):
 def load_from_file(filepath):
     sys.stdout.write(f"parsing {filepath}... ")
     sys.stdout.flush()
-    book = {}
+    book = defaultdict(list)
     word = None
     for new_word, line in iter_words(filepath):
         if new_word:
             word = line.lower()
-            book.setdefault(word, [])
-        else:
-            if word:
-                book[word].append(line)
-
+#            book.setdefault(word, [])
+#        else:
+        if word:
+            book[word].append(line)
     sys.stdout.write("finished.\n")
     sys.stdout.flush()
+    #return {w:"\n".join(d) for w,d in book.items()}
     return book
 
 
@@ -43,32 +44,33 @@ class Responder(BaseHTTPRequestHandler):
         self.end_headers()
 
     def _html(self, msg):
-        return msg.encode("utf8")
+        return "\n".join(msg).encode("utf8")
 
     def do_GET(self):
         word = self.path.split("/")[-1].lower()
         if word and word in self.book:
             self._set_headers()
-            self.wfile.write(self._html("\n".join(self.book[word])))
+            self.wfile.write(self._html(self.book[word]))
         else:
             self._set_headers(response=404)
-            self.wfile.write(self._html(f"{word} not found\n"))
+            self.wfile.write(self._html([f"{word} not found"]))
         self.close_connection = True
         sys.stderr.flush()
 
 
-def run(server=HTTPServer, handler=Responder, address="127.0.0.1", port=1913):
+def run(server=HTTPServer, handler=Responder, address="0.0.0.0", port=1913):
     s = (address, port)
     httpd = server(s, handler)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        sys.stdout.write("exiting...")
-        httpd.shutdown()
-        sys.stdout.write("cleanly exited")
+        sys.stdout.write("quitting...")
     except Exception as e:
-        sys.stdout.write("exiting:", str(e))
+        sys.stdout.write("exiting:" + repr(e))
+    finally:
         httpd.shutdown()
+        sys.stdout.flush()
+        sys.stderr.flush()
 
 
 if __name__ == "__main__":
