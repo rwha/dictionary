@@ -22,8 +22,7 @@ No frameworks are used and no safegaurds are in place, so as stated in the
 __This is not recommended for production__
 
 However, I find it useful to run as a systemd user mode service. It uses
-less than 100MB of memory and could probably use less if needed. I use
-it with a bash function:
+less than 45MB of memory. I use it with a bash function:
 
 ```bash
 # in ~/.bashrc

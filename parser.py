@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import sys
+import zlib
 from collections import defaultdict
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
@@ -19,18 +20,18 @@ def iter_words(filepath):
 def load_from_file(filepath):
     sys.stdout.write(f"parsing {filepath}... ")
     sys.stdout.flush()
-    book = defaultdict(list)
+    book = {}
     word = None
+    defn = []
     for new_word, line in iter_words(filepath):
         if new_word:
+            book[word] = zlib.compress(bytes("\n".join(defn), "utf-8"))
             word = line.lower()
-#            book.setdefault(word, [])
-#        else:
+            defn.clear()
         if word:
-            book[word].append(line)
+            defn.append(line)
     sys.stdout.write("finished.\n")
     sys.stdout.flush()
-    #return {w:"\n".join(d) for w,d in book.items()}
     return book
 
 
@@ -44,7 +45,7 @@ class Responder(BaseHTTPRequestHandler):
         self.end_headers()
 
     def _html(self, msg):
-        return "\n".join(msg).encode("utf8")
+        return zlib.decompress(msg)
 
     def do_GET(self):
         word = self.path.split("/")[-1].lower()
