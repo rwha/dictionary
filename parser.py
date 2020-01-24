@@ -2,7 +2,6 @@
 import re
 import sys
 import zlib
-from collections import defaultdict
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
